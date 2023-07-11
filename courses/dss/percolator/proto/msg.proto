@@ -13,18 +13,37 @@ package msg;
 
 message TimestampRequest {}
 
-message TimestampResponse {}
+message TimestampResponse {
+    uint64 timestamp = 1;
+}
 
-message GetRequest {}
+message GetRequest {
+    bytes key = 1;
+    uint64 start_ts = 2;
+}
 
-message GetResponse {}
+message GetResponse {
+    bytes value = 1;
+}
 
-message PrewriteRequest {}
+message PrewriteRequest {
+    uint64 start_ts = 1;
+    bytes primary = 2;
+    bytes key = 3;
+    bytes value = 4;
+}
 
-message PrewriteResponse {}
+message PrewriteResponse {
+    bool success = 1;
+}
 
 message CommitRequest {
     bool is_primary = 1;
+    uint64 start_ts = 2;
+    uint64 commit_ts = 3;
+    bytes key = 4;
 }
 
-message CommitResponse {}
+message CommitResponse {
+    bool success = 1;
+}
